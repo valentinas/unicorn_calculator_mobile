@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://coderpatsy.bitbucket.io/kittens/unicorns.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="patsy">
+	<meta name="description" content="Unicorns calculator for Kittens Game">
+
+	<title>Unicorns Calculator</title>
+	<script src="./uni_calc_files/lz-string.js"></script>
+	<script src="./uni_calc_files/jquery-3.6.0.slim.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./uni_calc_files/vs.css">
+	<style>
+		body.priority-unicorns .priorityCell:not(.unicorns),
+		body.priority-ivory .priorityCell:not(.ivory) {
+			display: none !important;
+		}
+
+		#unicornBuildings td {
+			vertical-align: middle;
+		}
+
+		.highlight {
+			background-color: #eeeeee;
+		}
+
+		.highlight > :last-child {
+			font-weight: bold;
+			color: #ff0000;
+		}
+
+		.timeDisplay {
+			min-width: 110px;
+		}
+
+		thead td,
+		#extras td[colspan] {
+			text-align: center;
+		}
+
+		#extras > div {
+			display: inline-block;
+			margin-right: 20px;
+			vertical-align: top;
+		}
+
+		#extras td[id] {
+			text-align: right;
+		}
+
+		.bldSeperator > td {
+			border-bottom: 1px dashed #cccccc;
+		}
+	</style>
+</head>
+<body class="priority-unicorns">
+
+	
+
+	<form class="">
+		<input id="showImport" type="button" value="Import data" tabindex="1" data-ol-has-click-handler="">
+		<div id="importDiv" class="hidden">
+			Import save<br>
+			<textarea id="importData" style="width: 550px; height: 250px;" tabindex="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea><br>
+			<input id="importOK" type="button" value="OK" tabindex="1" data-ol-has-click-handler="">
+			<input id="importCancel" type="button" value="Cancel" tabindex="1" data-ol-has-click-handler="">
+			<span id="importError" class="hidden">Unable to import data!</span>
+		</div>
+		<br><br>
+
+		<div id="prioritySelectBlock">
+			Recommend by:
+			<label>
+				<input id="prioritySelectUnicorns" type="radio" name="prioritySelect" value="unicorns" class="noReset" checked="" tabindex="4">
+				Unicorns
+			</label>
+			<label>
+				<input id="prioritySelectIvory" type="radio" name="prioritySelect" value="ivory" class="noReset" tabindex="4">
+				Ivory
+			</label>
+		</div>
+		<br>
+
+		<table id="unicornBuildings">
+			<thead>
+				<tr>
+					<td colspan="2">Name</td>
+					<td class="priorityCell unicorns" colspan="3">Cost</td>
+					<td class="priorityCell ivory">Cost</td>
+					<td class="priorityCell unicorns" colspan="2">Time to wait</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="alignLeft">
+						<label title="Toggle all buildings">
+							<input id="enableAllUnicornBuildings" type="checkbox" tabindex="1">
+							<span class="ital">Recommend</span>
+						</label>
+					</td>
+					<td></td>
+					<td class="priorityCell unicorns">in unicorns</td>
+					<td class="priorityCell unicorns">in tears</td>
+					<td class="priorityCell unicorns">in sacrifices</td>
+					<td class="priorityCell ivory">Ivory</td>
+					<td class="timeDisplay priorityCell unicorns">Average</td>
+					<td class="timeDisplay priorityCell unicorns">Max</td>
+					<td id="effGainHeader">+Eff. uPS</td>
+					<td class="timeDisplay">Amortization</td>
+					<td>Order to buy</td>
+				</tr>
+			</thead>
+			<tbody id="gains"><tr class="unicornBulding highlight"><td class="name"><label title="Recommend this building"><input id="checkbox-23" type="checkbox" class="enableUnicornBuilding noReset" tabindex="2"> Unic. Pasture</label></td><td class="owned"><input id="input-24" type="number" value="0" placeholder="0" min="0" max="999" tabindex="3"></td><td class="priceUnicorns priorityCell unicorns">2</td><td class="priceTears priorityCell unicorns">0.001(...)</td><td class="priceSacrifices priorityCell unicorns">0.001(...)</td><td class="priceIvory priorityCell ivory">---</td><td class="timeAverage priorityCell unicorns">---</td><td class="timeMax priorityCell unicorns">---</td><td class="effGain">+0.005</td><td class="amort">6m 40s </td><td class="order">1</td></tr><tr class="bldSeperator"><td colspan="10"></td></tr><tr class="unicornBulding"><td class="name"><label title="Recommend this building"><input id="checkbox-25" type="checkbox" class="enableUnicornBuilding noReset" tabindex="2"> Unicorn Tomb</label></td><td class="owned"><input id="input-26" type="number" value="0" placeholder="0" min="0" max="999" tabindex="3"></td><td class="priceUnicorns priorityCell unicorns">12.500K</td><td class="priceTears priorityCell unicorns">5</td><td class="priceSacrifices priorityCell unicorns">5</td><td class="priceIvory priorityCell ivory">500</td><td class="timeAverage priorityCell unicorns">---</td><td class="timeMax priorityCell unicorns">---</td><td class="effGain">---</td><td class="amort">---</td><td class="order">---</td></tr><tr class="unicornBulding"><td class="name"><label title="Recommend this building"><input id="checkbox-27" type="checkbox" class="enableUnicornBuilding noReset" tabindex="2"> Ivory Tower</label></td><td class="owned"><input id="input-28" type="number" value="0" placeholder="0" min="0" max="999" tabindex="3"></td><td class="priceUnicorns priorityCell unicorns">62.500K</td><td class="priceTears priorityCell unicorns">25</td><td class="priceSacrifices priorityCell unicorns">25</td><td class="priceIvory priorityCell ivory">25K</td><td class="timeAverage priorityCell unicorns">---</td><td class="timeMax priorityCell unicorns">---</td><td class="effGain">+0.126</td><td class="amort">5d 17h 30m 50s </td><td class="order">---</td></tr><tr class="unicornBulding"><td class="name"><label title="Recommend this building"><input id="checkbox-29" type="checkbox" class="enableUnicornBuilding noReset" tabindex="2"> Ivory Citadel</label></td><td class="owned"><input id="input-30" type="number" value="0" placeholder="0" min="0" max="999" tabindex="3"></td><td class="priceUnicorns priorityCell unicorns">125K</td><td class="priceTears priorityCell unicorns">50</td><td class="priceSacrifices priorityCell unicorns">50</td><td class="priceIvory priorityCell ivory">50K</td><td class="timeAverage priorityCell unicorns">---</td><td class="timeMax priorityCell unicorns">---</td><td class="effGain">---</td><td class="amort">---</td><td class="order">---</td></tr><tr class="unicornBulding"><td class="name"><label title="Recommend this building"><input id="checkbox-31" type="checkbox" class="enableUnicornBuilding noReset" tabindex="2"> Sky Palace</label></td><td class="owned"><input id="input-32" type="number" value="0" placeholder="0" min="0" max="999" tabindex="3"></td><td class="priceUnicorns priorityCell unicorns">1.250M</td><td class="priceTears priorityCell unicorns">500</td><td class="priceSacrifices priorityCell unicorns">500</td><td class="priceIvory priorityCell ivory">125K</td><td class="timeAverage priorityCell unicorns">---</td><td class="timeMax priorityCell unicorns">---</td><td class="effGain">---</td><td class="amort">---</td><td class="order">---</td></tr><tr class="unicornBulding"><td class="name"><label title="Recommend this building"><input id="checkbox-33" type="checkbox" class="enableUnicornBuilding noReset" tabindex="2"> Unicorn Utopia</label></td><td class="owned"><input id="input-34" type="number" value="0" placeholder="0" min="0" max="999" tabindex="3"></td><td class="priceUnicorns priorityCell unicorns">12.500M</td><td class="priceTears priorityCell unicorns">5000</td><td class="priceSacrifices priorityCell unicorns">5000</td><td class="priceIvory priorityCell ivory">1M</td><td class="timeAverage priorityCell unicorns">---</td><td class="timeMax priorityCell unicorns">---</td><td class="effGain">---</td><td class="amort">---</td><td class="order">---</td></tr><tr class="unicornBulding"><td class="name"><label title="Recommend this building"><input id="checkbox-35" type="checkbox" class="enableUnicornBuilding noReset" tabindex="2"> Sunspire</label></td><td class="owned"><input id="input-36" type="number" value="0" placeholder="0" min="0" max="999" tabindex="3"></td><td class="priceUnicorns priorityCell unicorns">62.500M</td><td class="priceTears priorityCell unicorns">25K</td><td class="priceSacrifices priorityCell unicorns">25K</td><td class="priceIvory priorityCell ivory">750K</td><td class="timeAverage priorityCell unicorns">---</td><td class="timeMax priorityCell unicorns">---</td><td class="effGain">---</td><td class="amort">---</td><td class="order">---</td></tr></tbody>
+		</table>
+		<input id="buyRecommendedBtn" type="button" value="Buy recommended" tabindex="4" data-ol-has-click-handler="">
+		<br><br>
+
+		<div id="extras">
+			<div><table>
+				<tbody><tr><td>Base uPS</td><td id="upsBase">0</td></tr>
+				<tr><td>Building bonus</td><td id="upsBuildBonus">0%</td></tr>
+				<tr><td>Displayed uPS</td><td id="upsDisplay">0</td></tr>
+				<tr><td>Unicorns per rift</td><td id="upsPerRift">500</td></tr>
+				<tr><td>Tower effect</td><td id="upsTower">0</td></tr>
+				<tr><td>Effective uPS</td><td id="upsEffective">0</td></tr>
+			</tbody></table></div>
+
+			<div><table>
+				<tbody><tr><td colspan="2">Mean time between</td></tr>
+				<tr><td>Unicorn rifts</td><td id="avgRiftTime">---</td></tr>
+				<tr><td>Ivory meteors</td><td id="avgIvoryTime">---</td></tr>
+				<tr><td>Alicorn rifts</td><td id="avgAlicornTime">---</td></tr>
+			</tbody></table></div>
+
+			<div><table>
+				<tbody><tr><td colspan="2">Ivory meteors</td></tr>
+				<tr><td>Avg. per meteor</td><td id="ivoryMeteorAmt">---</td></tr>
+				<tr><td>Effective iPS</td><td id="ivoryPS">0</td></tr>
+			</tbody></table></div>
+
+			<div><table>
+				<tbody><tr><td colspan="2">Alicorns</td></tr>
+				<tr><td>Base aPS</td><td id="alicornPS">0</td></tr>
+				<tr><td>Rift average</td><td id="alicornEffect">0</td></tr>
+				<tr><td>Effective aPS</td><td id="alicornPSEffective">0</td></tr>
+				<tr><td>TCs per sacrifice</td><td id="alicornTCRefine">1</td></tr>
+			</tbody></table></div>
+		</div>
+		<br>
+
+		<table id="buildingsBlock"><tr><td>Ziggurat</td><td><input id="input-0" type="number" value="0" placeholder="0" class="building" min="0" max="999" tabindex="4"></td></tr></table>
+		<br>
+
+		<table id="calendar">
+			<tbody><tr><td>Year</td><td><input id="year" value="0" type="number" min="0" tabindex="4"></td></tr>
+			<tr><td>Planetary cycle</td><td><select id="cycleSel" tabindex="4"><option value="0">⍙ Charon</option><option value="1">⍦ Umbra</option><option value="2">⍧ Yarn</option><option value="3">⌒ Helios</option><option value="4">⌾ Cath</option><option value="5">⍜ Redmoon</option><option value="6">⍫ Dune</option><option value="7">⎈ Piscine</option><option value="8">⍝ Terminus</option><option value="9">℣ Kairo</option></select></td></tr>
+		</tbody><tr><td>Temporal Accelerator</td><td><input id="input-22" type="number" value="0" placeholder="0" class="cfu" min="0" max="999" tabindex="4"></td></tr></table>
+		<div class="row"><label><input id="festival" type="checkbox" tabindex="4"> Festival</label></div>
+		<br>
+
+		<table id="res">
+			<tbody><tr><td>Paragon</td><td><input id="paragon" value="0" type="number" min="0" tabindex="4"></td></tr>
+			<tr><td>Burned paragon</td><td><input id="burnedParagon" value="0" type="number" min="0" tabindex="4"></td></tr>
+			<tr><td>BLS</td><td><input id="sorrow" class="short" value="0" type="number" min="0" tabindex="4"></td></tr>
+			<tr id="CMBRBonusRow" class="hidden">
+				<td>Magic kittens</td>
+				<td>
+					<span id="CMBRBonusSpan">---</span>
+					<label><input id="disableCMBR" type="checkbox" checked="" tabindex="4"> Disable</label>
+				</td>
+			</tr>
+			<tr><td>Praise</td><td><input id="praise" value="0" type="number" min="0" tabindex="4"> +<span id="praiseGain">0</span>%</td></tr>
+			<tr><td>Transcendence tier</td><td><input id="transcendenceTier" value="0" max="99" type="number" min="0" tabindex="4"></td></tr>
+			<tr><td>Atheism challenge completions</td><td><input id="atheismCompetions" class="short" value="0" type="number" min="0" tabindex="4"></td></tr>
+		</tbody><tr><td>Black Obelisk</td><td><input id="input-1" type="number" value="0" placeholder="0" class="tu" min="0" max="999" tabindex="4"></td></tr><tr><td>Blazar</td><td><input id="input-2" type="number" value="0" placeholder="0" class="tu" min="0" max="999" tabindex="4"></td></tr></table>
+		<br>
+
+		<div id="workshopBlock"><div><label><input id="checkbox-3" type="checkbox" class="upgrade" tabindex="4"> Unicorn Selection</label></div></div>
+		<div class="row"><label><input id="necrocracy" type="checkbox" tabindex="4"> Necrocracy</label></div>
+		<br>
+
+		<div id="perksBlock"><div><label><input id="checkbox-4" type="checkbox" class="perk" tabindex="4"> Engineering</label></div><div><label><input id="checkbox-5" type="checkbox" class="perk" tabindex="4"> Golden Ratio</label></div><div><label><input id="checkbox-6" type="checkbox" class="perk" tabindex="4"> Divine Proportion</label></div><div><label><input id="checkbox-7" type="checkbox" class="perk" tabindex="4"> Vitruvian Feline</label></div><div><label><input id="checkbox-8" type="checkbox" class="perk" tabindex="4"> Renaissance</label></div><div><label><input id="checkbox-9" type="checkbox" class="perk" tabindex="4"> Unicornmancy</label></div><div class="hidden"><label><input id="checkbox-10" type="checkbox" class="perk" tabindex="4"> Numerology</label></div><div><label><input id="checkbox-11" type="checkbox" class="perk" tabindex="4"> Numeromancy</label></div><div><label><input id="checkbox-12" type="checkbox" class="perk" tabindex="4"> Malkuth</label></div><div><label><input id="checkbox-13" type="checkbox" class="perk" tabindex="4"> Yesod</label></div><div><label><input id="checkbox-14" type="checkbox" class="perk" tabindex="4"> Hod</label></div><div><label><input id="checkbox-15" type="checkbox" class="perk" tabindex="4"> Netzach</label></div><div><label><input id="checkbox-16" type="checkbox" class="perk" tabindex="4"> Tiferet</label></div><div><label><input id="checkbox-17" type="checkbox" class="perk" tabindex="4"> Gevurah</label></div><div><label><input id="checkbox-18" type="checkbox" class="perk" tabindex="4"> Chesed</label></div><div><label><input id="checkbox-19" type="checkbox" class="perk" tabindex="4"> Binah</label></div><div><label><input id="checkbox-20" type="checkbox" class="perk" tabindex="4"> Chokhmah</label></div><div><label><input id="checkbox-21" type="checkbox" class="perk" tabindex="4"> Keter</label></div></div>
+	</form>
+	<br>
+
+	<p>
+		For <a href="http://kittensgame.com/web/" target="_blank">Kittens Game</a> version 1.4.9.0.r883
+		© <a href="http://bloodrizer.ru/" target="_blank">bloodrizer</a>.
+		<br><br>
+		Unicorns Calculator by <a href="https://coderpatsy.bitbucket.io/" target="_blank">patsy</a>, based on a spreadsheet by PoochyEXE.
+	</p>
+
+	<script src="./uni_calc_files/unicorns.js"></script>
+
+
+</body></html>
