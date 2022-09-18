@@ -16,10 +16,8 @@ body, form {
 	border: 1px solid black;
 	width: 600px;
 	height: 300px;
-	left: 50%;
 	top: 50%;
 	margin-top: -150px;
-	margin-left: -300px;
 	padding: 20px;
 	background-color: inherit;
 }
